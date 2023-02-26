@@ -1,4 +1,0 @@
-MONGO DB
-mongosh - start the mongo server shell
-db -display the current db
-use students - switch to or create a new database students
