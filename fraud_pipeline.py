@@ -54,14 +54,14 @@ def transform_data(df:pd.DataFrame):
     q3 = np.percentile(average_call_cost['ksh_per_min'], 75)
     iqr = q3-q1
     lower_bound = q1 - 1.5*iqr
-    upper_bound = q1 + 1.5*iqr
+    upper_bound = q3 + 1.5*iqr
     average_call_cost['call_activity'] = 'OK'
     average_call_cost.loc[(average_call_cost['ksh_per_min'] > upper_bound) | (average_call_cost['ksh_per_min'] <lower_bound), 'call_activity'] = 'Suspicion'
     
     # Use data compression techniques to optimize performance
     # ...
-    compressed_data = zlib.compress(str(average_call_cost.to_dict('records')).encode('utf-8'))
-    #compressed_data= average_call_cost.to_dict('records')
+    #compressed_data = zlib.compress(str(average_call_cost.to_dict('records')).encode('utf-8'))
+    compressed_data= average_call_cost.to_dict('records')
     # Use Python logging module to log errors and activities
     logger = logging.getLogger(__name__)
     logger.info("Data extraction completed.")   
